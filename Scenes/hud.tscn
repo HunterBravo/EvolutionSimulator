@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://d156u7c5d0qc7"]
+
+[ext_resource type="Texture2D" uid="uid://btrn3jqi7wqxw" path="res://Scenes/compass_stock_photo-removebg-preview.png" id="1_810jw"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -112.5
+offset_top = -225.0
+offset_right = 112.5
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_810jw")
+
+[node name="W" type="ColorRect" parent="TextureRect"]
+visible = false
+z_index = -1
+layout_mode = 0
+offset_left = 22.0
+offset_top = 102.0
+offset_right = 43.0
+offset_bottom = 118.0
+color = Color(0, 1, 0, 1)
+
+[node name="N" type="ColorRect" parent="TextureRect"]
+visible = false
+z_index = -1
+offset_left = 102.5
+offset_top = 27.0
+offset_right = 123.5
+offset_bottom = 43.0
+color = Color(0, 1, 0, 1)
+
+[node name="E" type="ColorRect" parent="TextureRect"]
+visible = false
+z_index = -1
+offset_left = 180.5
+offset_top = 104.0
+offset_right = 201.5
+offset_bottom = 120.0
+color = Color(0, 1, 0, 1)
+
+[node name="S" type="ColorRect" parent="TextureRect"]
+visible = false
+z_index = -1
+offset_left = 103.5
+offset_top = 182.0
+offset_right = 124.5
+offset_bottom = 198.0
+color = Color(0, 1, 0, 1)

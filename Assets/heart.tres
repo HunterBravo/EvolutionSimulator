@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b3so16a7r0cwu"]
+
+[resource]
+resource_name = "heart"
+albedo_color = Color(0.976471, 0.290196, 0.372549, 1)
+metallic = 1.0

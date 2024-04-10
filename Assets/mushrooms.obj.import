@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://mb382wq72s2w"
+path="res://.godot/imported/mushrooms.obj-b87e406bca1d1870c55a98608c50493f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mushrooms.obj-b87e406bca1d1870c55a98608c50493f.mesh"]
+
+source_file="res://Assets/mushrooms.obj"
+dest_files=["res://.godot/imported/mushrooms.obj-b87e406bca1d1870c55a98608c50493f.mesh", "res://.godot/imported/mushrooms.obj-b87e406bca1d1870c55a98608c50493f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

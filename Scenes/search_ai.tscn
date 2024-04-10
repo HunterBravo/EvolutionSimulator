@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8a7rfhrurndk"]
+
+[ext_resource type="Script" path="res://Scenes/search_ai.gd" id="1_uiiqg"]
+[ext_resource type="PackedScene" uid="uid://d156u7c5d0qc7" path="res://Scenes/hud.tscn" id="2_u5b5b"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_b7cjh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4c5wh"]
+
+[node name="SearchAI" type="CharacterBody3D"]
+script = ExtResource("1_uiiqg")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_b7cjh")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_4c5wh")
+
+[node name="Brains" type="NavigationAgent3D" parent="."]
+target_desired_distance = 0.3
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 0.707107, 0.707107, 0, 0.707107, -0.707107, 0, 3, -4)
+fov = 90.8
+near = 1.0
+
+[node name="Rays" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+
+[node name="Ray1" type="RayCast3D" parent="Rays"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Ray2" type="RayCast3D" parent="Rays"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Ray3" type="RayCast3D" parent="Rays"]
+transform = Transform3D(-1, -1.50996e-07, 6.60024e-15, 0, -4.37114e-08, -1, 1.50996e-07, -1, 4.37114e-08, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Ray4" type="RayCast3D" parent="Rays"]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Ray5" type="RayCast3D" parent="Rays"]
+transform = Transform3D(0.707107, 0.707107, -3.09086e-08, 0, -4.37114e-08, -1, -0.707107, 0.707107, -3.09086e-08, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Ray6" type="RayCast3D" parent="Rays"]
+transform = Transform3D(-0.707107, 0.707107, -3.09086e-08, 0, -4.37114e-08, -1, -0.707107, -0.707107, 3.09086e-08, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Ray7" type="RayCast3D" parent="Rays"]
+transform = Transform3D(-0.707107, -0.707107, 3.09086e-08, 0, -4.37114e-08, -1, 0.707107, -0.707107, 3.09086e-08, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Ray8" type="RayCast3D" parent="Rays"]
+transform = Transform3D(0.707107, -0.707107, 3.09086e-08, 0, -4.37114e-08, -1, 0.707107, 0.707107, -3.09086e-08, 0, -1, 0)
+target_position = Vector3(0, 1, 0)
+debug_shape_custom_color = Color(0.647059, 0.4, 0.0705882, 1)
+
+[node name="Stuck" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_u5b5b")]
+
+[connection signal="navigation_finished" from="Brains" to="." method="_on_brains_navigation_finished"]
+[connection signal="timeout" from="Stuck" to="." method="_on_stuck_timeout"]
