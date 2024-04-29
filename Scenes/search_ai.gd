@@ -1,12 +1,14 @@
 extends "res://Scripts/AI.gd"
 
-@onready var rays : Array = $Rays.get_children()
+
 @onready var stuckTimer = $Stuck
 @onready var brains = $Brains
 @onready var indicator : Array = $CanvasLayer/HUD/TextureRect.get_children()
 
 
 var hasTarget = false
+var foundFood = false
+
 
 #Used to determine a direction to move in, as well as how many times it should move in that direction
 var distanceRemaining = 8
@@ -55,6 +57,11 @@ func jump(direction):
 
 #ai will wander around the map, ai needs to pick a location within x distance of the nav mesh, and wander to it, if there isnt anything near by that takes priority
 func wanderMode():
+	#if it will navigate in a new direction
+	if foundFood == true:
+		foundFood = false
+		distanceToTravel(cardinalDirection)
+	
 	#if an entity has moved a defined amount of times, it will choose a new direction to go in
 	if distanceRemaining == 0:
 		distanceToTravel(cardinalDirection)
@@ -148,3 +155,18 @@ func _on_brains_navigation_finished():
 	#print("target reached")
 	
 	wanderMode()
+
+
+
+
+#if food is collided with, sets it as a target to navigate to, and prevents other food signals overwriting it in future
+func _on_food_finder_area_entered(area):
+	if foundFood == false:
+	
+		var foodLocation = area.position
+		foundFood = true
+		nav.target_position = foodLocation
+
+func testCollision():
+	print("test")
+	print($FoodFinder.get_overlapping_areas())
