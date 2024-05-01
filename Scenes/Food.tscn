@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://53dsk57uewa1"]
+[gd_scene load_steps=5 format=3 uid="uid://53dsk57uewa1"]
 
 [ext_resource type="ArrayMesh" uid="uid://mb382wq72s2w" path="res://Assets/mushrooms.obj" id="1_cvm4q"]
 [ext_resource type="Script" path="res://Scenes/Food.gd" id="1_oulaj"]
+[ext_resource type="AudioStream" uid="uid://dcl3qof1w756s" path="res://Scenes/EatSound.wav" id="3_1wflt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_05v7y"]
 radius = 1.0
@@ -15,5 +16,8 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_05v7y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_1wflt")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

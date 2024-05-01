@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8a7rfhrurndk"]
+[gd_scene load_steps=6 format=3 uid="uid://c8a7rfhrurndk"]
 
 [ext_resource type="Script" path="res://Scenes/search_ai.gd" id="1_uiiqg"]
 [ext_resource type="PackedScene" uid="uid://d156u7c5d0qc7" path="res://Scenes/hud.tscn" id="2_u5b5b"]
-[ext_resource type="AudioStream" uid="uid://dcl3qof1w756s" path="res://Scenes/EatSound.wav" id="3_34ul0"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_b7cjh"]
 
@@ -41,9 +40,6 @@ one_shot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FoodFinder"]
 shape = SubResource("CylinderShape3D_3ovd0")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_34ul0")
 
 [connection signal="navigation_finished" from="Brains" to="." method="_on_brains_navigation_finished"]
 [connection signal="timeout" from="Stuck" to="." method="_on_stuck_timeout"]
