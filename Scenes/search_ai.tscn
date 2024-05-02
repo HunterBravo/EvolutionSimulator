@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8a7rfhrurndk"]
+[gd_scene load_steps=8 format=3 uid="uid://c8a7rfhrurndk"]
 
 [ext_resource type="Script" path="res://Scripts/search_ai.gd" id="1_uiiqg"]
 [ext_resource type="PackedScene" uid="uid://d156u7c5d0qc7" path="res://Scenes/hud.tscn" id="2_u5b5b"]
@@ -10,6 +10,13 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3ovd0"]
 height = 10.0
 radius = 10.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s78lu"]
+height = 10.0
+radius = 15.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oysdt"]
+radius = 2.0
 
 [node name="SearchAI" type="CharacterBody3D" groups=["Creature"]]
 collision_layer = 7
@@ -30,14 +37,6 @@ transform = Transform3D(-1, 0, 0, 0, 0.707107, 0.707107, 0, 0.707107, -0.707107,
 fov = 90.8
 near = 1.0
 
-[node name="Stuck" type="Timer" parent="."]
-wait_time = 1.5
-one_shot = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_u5b5b")]
-
 [node name="FoodFinder" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FoodFinder"]
@@ -48,10 +47,38 @@ shape = SubResource("CylinderShape3D_3ovd0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimalBehaviour"]
 shape = SubResource("CylinderShape3D_3ovd0")
 
+[node name="HuntController" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HuntController"]
+shape = SubResource("CylinderShape3D_s78lu")
+
+[node name="FightController" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FightController"]
+shape = SubResource("SphereShape3D_oysdt")
+
+[node name="Stuck" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="HuntTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
 [node name="HungerTimer" type="Timer" parent="."]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("2_u5b5b")]
+
+[node name="FightTimer" type="Timer" parent="."]
+
 [connection signal="navigation_finished" from="Brains" to="." method="_on_brains_navigation_finished"]
-[connection signal="timeout" from="Stuck" to="." method="_on_stuck_timeout"]
 [connection signal="area_entered" from="FoodFinder" to="." method="_on_food_finder_area_entered"]
 [connection signal="body_entered" from="AnimalBehaviour" to="." method="_on_animal_behaviour_body_entered"]
+[connection signal="body_entered" from="HuntController" to="." method="_on_hunt_controller_body_entered"]
+[connection signal="body_entered" from="FightController" to="." method="_on_fight_controller_body_entered"]
+[connection signal="timeout" from="Stuck" to="." method="_on_stuck_timeout"]
+[connection signal="timeout" from="HuntTimer" to="." method="_on_hunt_timer_timeout"]
 [connection signal="timeout" from="HungerTimer" to="." method="_on_hunger_timer_timeout"]
+[connection signal="timeout" from="FightTimer" to="." method="_on_fight_timer_timeout"]

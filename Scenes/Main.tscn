@@ -31,6 +31,7 @@ script = ExtResource("1_tylmh")
 creature_count = 5
 food_count = 100
 food_value = 10
+food_respawn_timer = 30
 
 [node name="creatureFactory" parent="." instance=ExtResource("2_4ksix")]
 
@@ -94,4 +95,7 @@ shape = SubResource("SphereShape3D_ri5na")
 transform = Transform3D(1, 0, 0, 0, 0.583924, 0.811808, 0, -0.811808, 0.583924, -19.0826, 21.3946, 44.0358)
 current = true
 
+[node name="Food_Respawn_Timer" type="Timer" parent="."]
+
 [connection signal="eat" from="Food" to="." method="_on_food_ate"]
+[connection signal="timeout" from="Food_Respawn_Timer" to="." method="_on_food_respawn_timer_timeout"]
