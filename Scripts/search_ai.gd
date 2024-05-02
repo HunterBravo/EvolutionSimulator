@@ -204,17 +204,17 @@ func _on_food_finder_area_entered(area):
 
 
 
-var stored_binary : Array = [128,64,32,16,8,4,2,1]
+
 
 #converts genetics to a usable value
-#PROCCESS - FOR EACH NON 0, TAKE ITS CORROSPONDING BINARY POSITION AND ADDS IT TO TOTAL
-#BINARY PASSED MUST BE 8 BIT / 1 BYTE
+#PROCCESS - FOR EACH NON 0, TAKE ITS I VALUE AND RAISES 2 BY IT, THEN ADDS TO THE TOTAL
+
 func binary_to_denary(binary : String):
 	var total = 0
 	var binary_split = binary.split()
 	for i in range(0, binary_split.size()):
 		if binary_split[i] != '0':
-			total = total + stored_binary[i]
+			total = total + pow(2,i)
 	return total
 #used to identify suitable partners
 func get_creature_id():
@@ -229,6 +229,8 @@ func set_hunger(target_hunger):
 	self.hunger = target_hunger
 	if target_hunger >= binary_to_denary(max_hunger):
 		hunger = binary_to_denary(max_hunger)
+		if realHealth != binary_to_denary(health):
+			realHealth += target_hunger - hunger
 #sets the drain rate of hunger, balanced between other genetics
 func set_drain_rate():
 	var a = binary_to_denary(health)
@@ -258,38 +260,42 @@ func _on_hunger_timer_timeout():
 	if hunger <= 0:
 		self.queue_free()
 #if ai spots another creature, it will either run away (prey behaviour) or attack it (hunter behaviour)
+#if it is not hunting, fighting, or waiting (in fight), it will roll between 0 and 100, if it is above a value (script wise 80), then it will target the body and hunt it
 func _on_hunt_controller_body_entered(body):
 	if (isChasing == false) and (isFighting == false) and (isWaiting == false):
 		if body.is_in_group("Creature"):
-			var wants_to_kill = randi_range(0,100)
-			if wants_to_kill >= 80:
-				foundFood = false
-				isChasing = true
-				fightTarget = body
-				nav.target_position = fightTarget.position
-			pass
+			if body.isFighting == false:
+				var wants_to_kill = randi_range(0,100)
+				if wants_to_kill >= 80:
+					foundFood = false
+					isChasing = true
+					fightTarget = body
+					nav.target_position = fightTarget.position
 
 
+#if the fight target has not been engaged, it will abandon hunting and begin navigating again
 func _on_hunt_timer_timeout():
 	if (fightTarget != null) and (isFighting == false) and (isWaiting == false):
 		isChasing = false
 		distanceToTravel(cardinalDirection)
 
-
+#if a body that is attempting to fight the creature, or the creature itself collides with its target, they will begin fighitng, pause all other activities, and start a timer, with a wait time based on their speed
 func _on_fight_controller_body_entered(body):
 	if isChasing:
 		if body.is_in_group("Creature"):
 			if (self.fightTarget == body) or (body.fightTarget == self):
-				fightTarget = body
+				if body.fightTarget != self:
+					body.fightForced(self)
 				isWaiting = true
 				fightTimer.start()
-				
+
+#if another creature enters into combat with this one, it will be forced into defensive combat
 func fightForced(body):
 	if body != null:
 		fightTarget = body
 		isWaiting = true
 		fightTimer.start()
-	pass
+	
 
 func _on_fight_timer_timeout():
 	if fightTarget != null:

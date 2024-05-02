@@ -32,7 +32,6 @@ func create_creature(body1 : CharacterBody3D,body2 : CharacterBody3D):
 	#print("TEST")
 	#var placeholder = "Health is %s"
 	#print(placeholder % creature.health)
-	var hungerRate = ((binary_to_denary(newSpeed) + binary_to_denary(newStrength) + binary_to_denary(newHealth)) / 3) / 100
 	creature.position = body1.position + Vector3(1,0,1)
 	
 	add_child(creature)
