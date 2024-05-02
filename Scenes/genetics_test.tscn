@@ -1,18 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dresagpbpbybt"]
+[gd_scene load_steps=7 format=3 uid="uid://dresagpbpbybt"]
 
 [ext_resource type="Script" path="res://Scripts/creature_factory.gd" id="1_82lwe"]
 [ext_resource type="Script" path="res://Scripts/genetics_test.gd" id="1_bgmw4"]
-[ext_resource type="Script" path="res://Scripts/search_ai.gd" id="2_7mcxa"]
-[ext_resource type="PackedScene" uid="uid://d156u7c5d0qc7" path="res://Scenes/hud.tscn" id="3_c7l53"]
+[ext_resource type="PackedScene" uid="uid://c8a7rfhrurndk" path="res://Scenes/search_ai.tscn" id="3_48ma0"]
 [ext_resource type="MeshLibrary" uid="uid://b0p8e7kofusvo" path="res://Mesh In Use/tile2.tres" id="3_widpv"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_b7cjh"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_4c5wh"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_3ovd0"]
-height = 10.0
-radius = 10.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_1fi1g"]
 vertices = PackedVector3Array(11.367, 2.375, -12.383, 11.617, 2.375, -12.133, 11.617, 2.375, -13.633, 11.117, 2.375, -13.383, -54.633, 2.375, -13.633, -53.633, 2.375, -13.133, -53.133, 2.375, -13.383, -53.633, 2.375, 30.617, -52.133, 2.375, 30.617, -52.383, 2.375, 30.367, -53.383, 2.375, 30.117, -53.133, 2.375, -13.383, 11.117, 2.375, -13.383, 11.617, 2.375, -13.633, -54.633, 2.375, -13.633, -53.633, 2.375, -13.133, -53.633, 2.375, 30.617, -53.383, 2.375, 30.117, -53.133, 2.375, -13.383, -52.133, 1.625, -12.133, -52.383, 2.375, 30.367, -52.133, 2.375, 30.617, 11.617, 2.375, 30.617, 11.617, 2.375, -12.133, 11.367, 2.375, -12.383, 9.31859, 1.625, -12.375, -52.3744, 1.625, 28.9015, 7.84294, 1.625, -9.62906, 9.3508, 1.625, 29.3442, 9.39091, 1.625, -0.615249, 9.37795, 1.625, -9.61807)
@@ -35,77 +26,11 @@ script = ExtResource("1_bgmw4")
 [node name="creatureFactory" type="Node3D" parent="."]
 script = ExtResource("1_82lwe")
 
-[node name="SearchAI" type="CharacterBody3D" parent="creatureFactory"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.47054, 0)
-script = ExtResource("2_7mcxa")
+[node name="SearchAI" parent="creatureFactory" instance=ExtResource("3_48ma0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1861, 0)
 
-[node name="Body" type="MeshInstance3D" parent="creatureFactory/SearchAI"]
-mesh = SubResource("SphereMesh_b7cjh")
-
-[node name="Collision" type="CollisionShape3D" parent="creatureFactory/SearchAI"]
-shape = SubResource("SphereShape3D_4c5wh")
-
-[node name="Brains" type="NavigationAgent3D" parent="creatureFactory/SearchAI"]
-target_desired_distance = 0.3
-
-[node name="Camera3D" type="Camera3D" parent="creatureFactory/SearchAI"]
-transform = Transform3D(-1, 0, 0, 0, 0.707107, 0.707107, 0, 0.707107, -0.707107, 0, 3, -4)
-fov = 90.8
-near = 1.0
-
-[node name="Stuck" type="Timer" parent="creatureFactory/SearchAI"]
-wait_time = 1.5
-one_shot = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="creatureFactory/SearchAI"]
-
-[node name="HUD" parent="creatureFactory/SearchAI/CanvasLayer" instance=ExtResource("3_c7l53")]
-
-[node name="FoodFinder" type="Area3D" parent="creatureFactory/SearchAI"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creatureFactory/SearchAI/FoodFinder"]
-shape = SubResource("CylinderShape3D_3ovd0")
-
-[node name="AnimalBehaviour" type="Area3D" parent="creatureFactory/SearchAI"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creatureFactory/SearchAI/AnimalBehaviour"]
-shape = SubResource("CylinderShape3D_3ovd0")
-
-[node name="SearchAI2" type="CharacterBody3D" parent="creatureFactory"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.64341, 2.46704, 0)
-script = ExtResource("2_7mcxa")
-
-[node name="Body" type="MeshInstance3D" parent="creatureFactory/SearchAI2"]
-mesh = SubResource("SphereMesh_b7cjh")
-
-[node name="Collision" type="CollisionShape3D" parent="creatureFactory/SearchAI2"]
-shape = SubResource("SphereShape3D_4c5wh")
-
-[node name="Brains" type="NavigationAgent3D" parent="creatureFactory/SearchAI2"]
-target_desired_distance = 0.3
-
-[node name="Camera3D" type="Camera3D" parent="creatureFactory/SearchAI2"]
-transform = Transform3D(-1, 0, 0, 0, 0.707107, 0.707107, 0, 0.707107, -0.707107, 0, 3, -4)
-fov = 90.8
-near = 1.0
-
-[node name="Stuck" type="Timer" parent="creatureFactory/SearchAI2"]
-wait_time = 1.5
-one_shot = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="creatureFactory/SearchAI2"]
-
-[node name="HUD" parent="creatureFactory/SearchAI2/CanvasLayer" instance=ExtResource("3_c7l53")]
-
-[node name="FoodFinder" type="Area3D" parent="creatureFactory/SearchAI2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creatureFactory/SearchAI2/FoodFinder"]
-shape = SubResource("CylinderShape3D_3ovd0")
-
-[node name="AnimalBehaviour" type="Area3D" parent="creatureFactory/SearchAI2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="creatureFactory/SearchAI2/AnimalBehaviour"]
-shape = SubResource("CylinderShape3D_3ovd0")
+[node name="SearchAI2" parent="creatureFactory" instance=ExtResource("3_48ma0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80619, 2.34321, 0)
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -126,11 +51,6 @@ transform = Transform3D(0.970968, -1.04562e-08, 0.239211, -0.239211, -4.24423e-0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_mded6")
 
-[connection signal="navigation_finished" from="creatureFactory/SearchAI/Brains" to="creatureFactory/SearchAI" method="_on_brains_navigation_finished"]
-[connection signal="timeout" from="creatureFactory/SearchAI/Stuck" to="creatureFactory/SearchAI" method="_on_stuck_timeout"]
-[connection signal="area_entered" from="creatureFactory/SearchAI/FoodFinder" to="creatureFactory/SearchAI" method="_on_food_finder_area_entered"]
-[connection signal="body_entered" from="creatureFactory/SearchAI/AnimalBehaviour" to="creatureFactory/SearchAI" method="_on_animal_behaviour_body_entered"]
-[connection signal="navigation_finished" from="creatureFactory/SearchAI2/Brains" to="creatureFactory/SearchAI2" method="_on_brains_navigation_finished"]
-[connection signal="timeout" from="creatureFactory/SearchAI2/Stuck" to="creatureFactory/SearchAI2" method="_on_stuck_timeout"]
-[connection signal="area_entered" from="creatureFactory/SearchAI2/FoodFinder" to="creatureFactory/SearchAI2" method="_on_food_finder_area_entered"]
-[connection signal="body_entered" from="creatureFactory/SearchAI2/AnimalBehaviour" to="creatureFactory/SearchAI2" method="_on_animal_behaviour_body_entered"]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.998853, -3.81027e-09, -0.047891, -0.0219184, 0.889121, 0.457147, 0.0425809, 0.457672, -0.888101, -17.4266, 27.9931, -31.4196)
+current = true
