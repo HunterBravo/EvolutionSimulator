@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dse2b8e04yvjo"]
 
 [ext_resource type="PackedScene" uid="uid://c8a7rfhrurndk" path="res://Scenes/search_ai.tscn" id="1_iuox6"]
-[ext_resource type="Script" path="res://Scenes/Main.gd" id="1_tylmh"]
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_tylmh"]
 [ext_resource type="MeshLibrary" uid="uid://b0p8e7kofusvo" path="res://Mesh In Use/tile2.tres" id="2_sor5i"]
 [ext_resource type="PackedScene" uid="uid://53dsk57uewa1" path="res://Scenes/Food.tscn" id="3_vens7"]
 

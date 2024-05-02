@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d156u7c5d0qc7"]
 
-[ext_resource type="Texture2D" uid="uid://btrn3jqi7wqxw" path="res://Scenes/compass_stock_photo-removebg-preview.png" id="1_810jw"]
+[ext_resource type="Texture2D" uid="uid://btrn3jqi7wqxw" path="res://Assets/compass_stock_photo-removebg-preview.png" id="1_810jw"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3

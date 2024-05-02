@@ -4,7 +4,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var lastKnownDirection = Vector3()
 
-const SPEED = 2
+var speed = "00000010"
 const ACCEL = 10
 const JUMP_VELOCITY = 10
 
@@ -34,7 +34,7 @@ func _physics_process(delta):
 	if (direction.y > 0.26) and (is_on_floor()):
 		jump(direction)
 	
-	velocity = velocity.lerp(direction * SPEED , ACCEL * delta)
+	
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -47,6 +47,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func jump(direction):
-	velocity.y = JUMP_VELOCITY * SPEED
+	velocity.y = JUMP_VELOCITY * speed
 	lastKnownDirection = direction
 	

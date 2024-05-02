@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq6c7r3uohlem"]
+
+[ext_resource type="Script" path="res://Scripts/creature_factory.gd" id="1_81oe6"]
+
+[node name="creatureFactory" type="Node3D"]
+script = ExtResource("1_81oe6")

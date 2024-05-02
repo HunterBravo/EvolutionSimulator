@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c8a7rfhrurndk"]
 
-[ext_resource type="Script" path="res://Scenes/search_ai.gd" id="1_uiiqg"]
+[ext_resource type="Script" path="res://Scripts/search_ai.gd" id="1_uiiqg"]
 [ext_resource type="PackedScene" uid="uid://d156u7c5d0qc7" path="res://Scenes/hud.tscn" id="2_u5b5b"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_b7cjh"]
@@ -41,6 +41,12 @@ one_shot = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FoodFinder"]
 shape = SubResource("CylinderShape3D_3ovd0")
 
+[node name="AnimalBehaviour" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimalBehaviour"]
+shape = SubResource("CylinderShape3D_3ovd0")
+
 [connection signal="navigation_finished" from="Brains" to="." method="_on_brains_navigation_finished"]
 [connection signal="timeout" from="Stuck" to="." method="_on_stuck_timeout"]
 [connection signal="area_entered" from="FoodFinder" to="." method="_on_food_finder_area_entered"]
+[connection signal="body_entered" from="AnimalBehaviour" to="." method="_on_animal_behaviour_body_entered"]
