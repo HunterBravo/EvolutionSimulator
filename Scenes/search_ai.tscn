@@ -54,3 +54,4 @@ shape = SubResource("CylinderShape3D_3ovd0")
 [connection signal="timeout" from="Stuck" to="." method="_on_stuck_timeout"]
 [connection signal="area_entered" from="FoodFinder" to="." method="_on_food_finder_area_entered"]
 [connection signal="body_entered" from="AnimalBehaviour" to="." method="_on_animal_behaviour_body_entered"]
+[connection signal="timeout" from="HungerTimer" to="." method="_on_hunger_timer_timeout"]

@@ -1,11 +1,12 @@
 extends CharacterBody3D
 
-
+#onready scenes
 @onready var stuckTimer = $Stuck
 @onready var brains = $Brains
 @onready var indicator : Array = $CanvasLayer/HUD/TextureRect.get_children()
 @onready var nav: NavigationAgent3D = $Brains
 @onready var hungerTimer = $HungerTimer
+
 var lastKnownDirection = Vector3()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 const ACCEL = 10
@@ -16,7 +17,7 @@ var speed = "00000001"
 var strength = "10101010"
 var hunger
 var max_hunger = "10101010"
-var food_drain_rate = 1
+var food_drain_rate = 0
 
 #Identifies different creature species
 var creature_type = 0
@@ -35,6 +36,8 @@ func _ready():
 	distanceToTravel(0)
 	wanderMode()
 	hunger = binary_to_denary(max_hunger) / 2
+	hungerTimer.start()
+	set_drain_rate()
 	
  
 #process ran every frame
@@ -209,6 +212,12 @@ func get_creature_food_percentage():
 #used to set hunger after actions
 func set_hunger(target_hunger):
 	self.hunger = target_hunger
+func set_drain_rate():
+	var a = binary_to_denary(health)
+	var b = binary_to_denary(speed)
+	var c = binary_to_denary(strength)
+	food_drain_rate = (float((a+b+c)) / 3)/100
+	
 #if two creatures of the same type spot eachother, there is a chance they reproduce
 
 
@@ -232,18 +241,7 @@ func _on_animal_behaviour_body_entered(body):
 					self.get_parent().create_creature(self,body)
 				get_tree().create_timer(2).timeout
 				distanceToTravel(cardinalDirection)
-					
-					
-					
-	
-func make_child():
-	pass
 
-
-
-
-
-			
 		#if (body.isReproducing == true):
 			#if self.sex == "female":
 				#print("getting parent")
@@ -252,3 +250,10 @@ func make_child():
 			#isReproducing = false
 			#wanderMode()
 
+
+
+func _on_hunger_timer_timeout():
+	hunger = hunger - food_drain_rate
+	print(hunger)
+	if hunger <= 0:
+		self.queue_free()
