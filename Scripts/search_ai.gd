@@ -1,13 +1,18 @@
-extends "res://Scripts/AI.gd"
+extends CharacterBody3D
 
 
 @onready var stuckTimer = $Stuck
 @onready var brains = $Brains
 @onready var indicator : Array = $CanvasLayer/HUD/TextureRect.get_children()
-
+@onready var nav: NavigationAgent3D = $Brains
+@onready var hungerTimer = $HungerTimer
+var lastKnownDirection = Vector3()
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+const ACCEL = 10
+const JUMP_VELOCITY = 10
 
 var health = "00001010"
-
+var speed = "00000001"
 var strength = "10101010"
 var hunger
 var max_hunger = "10101010"
@@ -29,7 +34,8 @@ var cardinalDirection = -1
 func _ready():
 	distanceToTravel(0)
 	wanderMode()
-	hunger = binary_to_denary(max_hunger)
+	hunger = binary_to_denary(max_hunger) / 2
+	
  
 #process ran every frame
 func _physics_process(delta):
@@ -48,7 +54,7 @@ func _physics_process(delta):
 		direction = direction.normalized()
 		
 		#sets velocity of self
-		velocity = velocity.lerp(direction * binary_to_denary(speed) , ACCEL * delta)
+		velocity = velocity.lerp(direction * float(binary_to_denary(speed))/50 , ACCEL * delta)
 		
 		#adds gravity if not on the floor
 		if not is_on_floor():
@@ -178,10 +184,7 @@ func _on_food_finder_area_entered(area):
 			foundFood = true
 			nav.target_position = foodLocation
 
-func testCollision():
-	print("test")
-	print($FoodFinder.get_overlapping_areas())
-	
+
 
 var stored_binary : Array = [128,64,32,16,8,4,2,1]
 
@@ -200,8 +203,8 @@ func get_creature_id():
 	return self.creature_type
 #used to identify whether creatures can reproduce
 func get_creature_food_percentage():
-	print(self.hunger)
-	print (self.binary_to_denary(max_hunger))
+	#print(self.hunger)
+	#print (self.binary_to_denary(max_hunger))
 	return (self.hunger / self.binary_to_denary(max_hunger))
 #used to set hunger after actions
 func set_hunger(target_hunger):
@@ -213,11 +216,11 @@ func set_hunger(target_hunger):
 
 
 func _on_animal_behaviour_body_entered(body):
-	print("animal search area entered")
-	print(body.name)
-	if body.name.contains("SearchAI"):
+	#print("animal search area entered")
+	#print(body.name)
+	if body.is_in_group("Creature"):
 		if body.get_creature_id() == self.get_creature_id():
-			print(body.get_creature_food_percentage())
+			#print(body.get_creature_food_percentage())
 			if ((body.get_creature_food_percentage() >= 0.9) and (self.get_creature_food_percentage() >= 0.9)):
 				self.set_hunger(self.hunger / 2)
 				body.set_hunger(body.hunger / 2)

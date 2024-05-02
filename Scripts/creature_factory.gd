@@ -27,19 +27,21 @@ func create_creature(body1 : CharacterBody3D,body2 : CharacterBody3D):
 		creature.sex = "male"
 	else:
 		creature.sex = "female"
-	
-	print("#####TEST#####")
-	var placeholder = "Health is %s"
-	print(placeholder % creature.health)
+	print(creature.sex)
+	#DEBUG
+	#print("TEST")
+	#var placeholder = "Health is %s"
+	#print(placeholder % creature.health)
 	var hungerRate = ((binary_to_denary(newSpeed) + binary_to_denary(newStrength) + binary_to_denary(newHealth)) / 3) / 100
 	creature.position = body1.position + Vector3(1,0,1)
+	
 	add_child(creature)
 	
 
 func reproduction_gene_swap(genesA :String ,genesB : String) -> String:
-	var n_point = randi_range(1,8)
-	print("n_point is")
-	print(n_point)
+	var n_point = randi_range(0,7)
+	#print("n_point is")
+	#print(n_point)
 	var newString = ""
 	for i in range(0,n_point):
 		newString = newString + genesA[i]

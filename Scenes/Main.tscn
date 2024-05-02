@@ -28,11 +28,14 @@ radius = 1.0
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tylmh")
+creature_count = 5
+food_count = 100
+food_value = 10
 
 [node name="creatureFactory" parent="." instance=ExtResource("2_4ksix")]
 
 [node name="SearchAI" parent="creatureFactory" instance=ExtResource("1_iuox6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.724, 1.626, 10.553)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.724, -15.8455, 10.553)
 
 [node name="Food_instances" type="Node3D" parent="."]
 
@@ -82,8 +85,13 @@ skeleton = NodePath("../../..")
 
 [node name="CheckClear" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, -50, -50)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CheckClear"]
 shape = SubResource("SphereShape3D_ri5na")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.583924, 0.811808, 0, -0.811808, 0.583924, -19.0826, 21.3946, 44.0358)
+current = true
 
 [connection signal="eat" from="Food" to="." method="_on_food_ate"]

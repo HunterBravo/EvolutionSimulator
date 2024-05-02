@@ -11,7 +11,7 @@
 height = 10.0
 radius = 10.0
 
-[node name="SearchAI" type="CharacterBody3D"]
+[node name="SearchAI" type="CharacterBody3D" groups=["Creature"]]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_uiiqg")
@@ -47,6 +47,8 @@ shape = SubResource("CylinderShape3D_3ovd0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimalBehaviour"]
 shape = SubResource("CylinderShape3D_3ovd0")
+
+[node name="HungerTimer" type="Timer" parent="."]
 
 [connection signal="navigation_finished" from="Brains" to="." method="_on_brains_navigation_finished"]
 [connection signal="timeout" from="Stuck" to="." method="_on_stuck_timeout"]

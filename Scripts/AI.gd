@@ -9,7 +9,7 @@ const ACCEL = 10
 const JUMP_VELOCITY = 10
 
 @onready var nav: NavigationAgent3D = $Brains
-@onready var Target = $"../Target"
+
 
 var targeted = false
 
@@ -24,7 +24,7 @@ func _physics_process(delta):
 		
 	var direction = Vector3()
 	if targeted == false:
-		nav.target_position = Target.global_position
+		
 		targeted = true
 
 	direction = nav.get_next_path_position() - global_position
