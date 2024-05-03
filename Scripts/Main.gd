@@ -40,8 +40,6 @@ func _process(delta):
 		food_timer.start()
 		
 	
-	if Input.is_action_pressed("ui_accept"):
-		add_food()
 
 func _on_food_ate(foodLoc,animal):
 	if animal != null:

@@ -20,4 +20,7 @@ shape = SubResource("SphereShape3D_05v7y")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_1wflt")
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_1wflt")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
