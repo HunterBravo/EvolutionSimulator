@@ -28,7 +28,7 @@ radius = 1.0
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_tylmh")
-creature_count = 5
+creature_count = 2
 food_count = 100
 food_value = 10
 food_respawn_timer = 30

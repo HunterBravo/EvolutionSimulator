@@ -4,8 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://d156u7c5d0qc7" path="res://Scenes/hud.tscn" id="2_u5b5b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u330"]
+resource_local_to_scene = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_b7cjh"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_1u330")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4c5wh"]

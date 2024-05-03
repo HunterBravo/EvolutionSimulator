@@ -4,7 +4,6 @@ var food_scene = load("res://Scenes/Food.tscn")
 var food
 
 var creature_scene = load("res://Scenes/search_ai.tscn")
-var creature
 @export var creature_count: int = 0
 @export var food_count : int = 0
 @export var food_max : int = 100
@@ -74,7 +73,7 @@ func add_food():
 	food_parent.add_child(food)
 
 func create_creature(save_loc):
-	creature = creature_scene.instantiate()
+	var creature = creature_scene.instantiate()
 	
 	#stat manager
 	#sex
@@ -97,6 +96,7 @@ func create_creature(save_loc):
 		creature.max_hunger = rand_genes()
 	else:
 		load_data(save_loc,creature)
+	creature.creature_type = save_loc
 	#position manager
 	var x = randf_range(boundaries[0],boundaries[1])
 	var z = randf_range(boundaries[2],boundaries[3])
@@ -110,6 +110,7 @@ func create_creature(save_loc):
 	
 	creature_factory.add_child(creature)
 	print(creature.get_parent())
+	creature = null
 
 func generate_world(food_count,creature_count):
 	
@@ -117,8 +118,11 @@ func generate_world(food_count,creature_count):
 		add_food()
 		
 		
-	for i in range(0,creature_count):
-		create_creature(0)
+	
+	for j in range(0,4):
+		for i in range(0,creature_count):
+			create_creature(j)
+	
 		
 func rand_genes() -> String:
 	var dna = ""

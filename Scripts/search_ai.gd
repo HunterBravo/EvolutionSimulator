@@ -13,7 +13,7 @@ var lastKnownDirection = Vector3()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 const ACCEL = 10
 const JUMP_VELOCITY = 10
-
+var color
 var health = "00001010"
 var realHealth
 var speed = "00000001"
@@ -51,6 +51,7 @@ func _ready():
 	hungerTimer.start()
 	set_drain_rate()
 	fightTimer.wait_time = float(1) / realSpeed
+	
 	
 	
 	
