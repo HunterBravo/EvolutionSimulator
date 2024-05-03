@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dse2b8e04yvjo"]
+[gd_scene load_steps=11 format=3 uid="uid://dse2b8e04yvjo"]
 
 [ext_resource type="PackedScene" uid="uid://c8a7rfhrurndk" path="res://Scenes/search_ai.tscn" id="1_iuox6"]
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_tylmh"]
 [ext_resource type="PackedScene" uid="uid://bq6c7r3uohlem" path="res://Scenes/creature_factory.tscn" id="2_4ksix"]
 [ext_resource type="MeshLibrary" uid="uid://b0p8e7kofusvo" path="res://Mesh In Use/tile2.tres" id="2_sor5i"]
 [ext_resource type="PackedScene" uid="uid://53dsk57uewa1" path="res://Scenes/Food.tscn" id="3_vens7"]
+[ext_resource type="Script" path="res://observer.gd" id="6_hp0eu"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_bwffu"]
 vertices = PackedVector3Array(11.367, 2.375, -12.383, 11.617, 2.375, -12.133, 11.617, 2.375, -13.633, 11.117, 2.375, -13.383, -54.633, 2.375, -13.633, -53.633, 2.375, -13.133, -53.133, 2.375, -13.383, -53.633, 2.375, 30.617, -52.133, 2.375, 30.617, -52.383, 2.375, 30.367, -53.383, 2.375, 30.117, -53.133, 2.375, -13.383, 11.117, 2.375, -13.383, 11.617, 2.375, -13.633, -54.633, 2.375, -13.633, -53.633, 2.375, -13.133, -53.633, 2.375, 30.617, -53.383, 2.375, 30.117, -53.133, 2.375, -13.383, -52.133, 1.625, -12.133, -52.383, 2.375, 30.367, -52.133, 2.375, 30.617, 11.617, 2.375, 30.617, 11.617, 2.375, -12.133, 11.367, 2.375, -12.383, 9.31859, 1.625, -12.375, -52.3744, 1.625, 28.9015, 7.84294, 1.625, -9.62906, 9.3508, 1.625, 29.3442, 9.39091, 1.625, -0.615249, 9.37795, 1.625, -9.61807)
@@ -94,6 +95,7 @@ shape = SubResource("SphereShape3D_ri5na")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.583924, 0.811808, 0, -0.811808, 0.583924, -19.0826, 21.3946, 44.0358)
 current = true
+script = ExtResource("6_hp0eu")
 
 [node name="Food_Respawn_Timer" type="Timer" parent="."]
 
