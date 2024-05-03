@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dse2b8e04yvjo"]
+[gd_scene load_steps=11 format=3 uid="uid://dse2b8e04yvjo"]
 
+[ext_resource type="PackedScene" uid="uid://c8a7rfhrurndk" path="res://Scenes/search_ai.tscn" id="1_iuox6"]
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_tylmh"]
 [ext_resource type="PackedScene" uid="uid://bq6c7r3uohlem" path="res://Scenes/creature_factory.tscn" id="2_4ksix"]
 [ext_resource type="MeshLibrary" uid="uid://b0p8e7kofusvo" path="res://Mesh In Use/tile2.tres" id="2_sor5i"]
@@ -34,6 +35,9 @@ food_value = 10
 food_respawn_timer = 30
 
 [node name="creatureFactory" parent="." instance=ExtResource("2_4ksix")]
+
+[node name="SearchAI" parent="creatureFactory" instance=ExtResource("1_iuox6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.724, -15.8455, 10.553)
 
 [node name="Food_instances" type="Node3D" parent="."]
 

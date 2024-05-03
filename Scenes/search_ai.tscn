@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8a7rfhrurndk"]
+[gd_scene load_steps=9 format=3 uid="uid://c8a7rfhrurndk"]
 
 [ext_resource type="Script" path="res://Scripts/search_ai.gd" id="1_uiiqg"]
 [ext_resource type="PackedScene" uid="uid://d156u7c5d0qc7" path="res://Scenes/hud.tscn" id="2_u5b5b"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u330"]
+
 [sub_resource type="SphereMesh" id="SphereMesh_b7cjh"]
+material = SubResource("StandardMaterial3D_1u330")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4c5wh"]
 

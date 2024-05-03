@@ -18,6 +18,8 @@ var startup = false
 @onready var area_checker = $CheckClear
 @onready var food_parent = $Food_instances
 @onready var food_timer = $Food_Respawn_Timer
+
+var save_paths : Array = ["user://variable.save","user://variable.save1","user://variable.save2","user://variable.save3"]
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -71,24 +73,30 @@ func add_food():
 	area_checker.position = Vector3(-50,-50,-50)
 	food_parent.add_child(food)
 
-func create_creature():
+func create_creature(save_loc):
 	creature = creature_scene.instantiate()
 	
 	#stat manager
 	#sex
+	
 	var rand = randi_range(0,1)
 	if rand == 0:
 		creature.sex = "male"
 	else:
 		creature.sex = "female"
 	print(creature.sex)
-	#health
-	creature.health = rand_genes()
-	#strength
-	creature.strength = rand_genes()
-	#speed
-	creature.speed = rand_genes()
 	
+	if save_loc == -1:
+		#health
+		creature.health = rand_genes()
+		#strength
+		creature.strength = rand_genes()
+		#speed
+		creature.speed = rand_genes()
+		#hunger
+		creature.max_hunger = rand_genes()
+	else:
+		load_data(save_loc,creature)
 	#position manager
 	var x = randf_range(boundaries[0],boundaries[1])
 	var z = randf_range(boundaries[2],boundaries[3])
@@ -110,7 +118,7 @@ func generate_world(food_count,creature_count):
 		
 		
 	for i in range(0,creature_count):
-		create_creature()
+		create_creature(0)
 		
 func rand_genes() -> String:
 	var dna = ""
@@ -133,3 +141,25 @@ func _on_food_respawn_timer_timeout():
 	for i in range(0,children):
 		add_food()
 	pass # Replace with function body.
+
+func load_data(save_loc,creature):
+	if FileAccess.file_exists(save_paths[save_loc]):
+		var file = FileAccess.open(save_paths[save_loc], FileAccess.READ)
+		creature.set_color(file.get_var())
+		creature.health = bin_string(int(file.get_var()))
+		creature.strength = bin_string(int(file.get_var()))
+		creature.speed = bin_string(int(file.get_var()))
+		creature.hunger = bin_string(int(file.get_var()))
+		
+	else:
+		print("no data saved")
+	
+#https://www.reddit.com/r/godot/comments/l8ximk/translate_a_base_10_number_into_a_binary_number/
+func bin_string(n):
+	var ret_str = ""
+	while n > 0:
+		ret_str = str(n&1) + ret_str
+		n = n>>1
+	return ret_str
+
+

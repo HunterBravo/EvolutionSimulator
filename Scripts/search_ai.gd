@@ -8,6 +8,7 @@ extends CharacterBody3D
 @onready var hungerTimer = $HungerTimer
 @onready var huntTimer = $HuntTimer
 @onready var fightTimer = $FightTimer
+@onready var sphere = $Body
 var lastKnownDirection = Vector3()
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 const ACCEL = 10
@@ -22,7 +23,6 @@ var realStrength
 var hunger
 var max_hunger = "10101010"
 var food_drain_rate = 0
-
 #Identifies different creature species
 var creature_type = 0
 #Identifies creature sex
@@ -51,6 +51,7 @@ func _ready():
 	hungerTimer.start()
 	set_drain_rate()
 	fightTimer.wait_time = float(1) / realSpeed
+	
 	
 	
  
@@ -320,3 +321,5 @@ func won_Fight(hunger_gain):
 	isWaiting = false
 	set_hunger(hunger + hunger_gain)
 	distanceToTravel(cardinalDirection)
+func set_color(color):
+	$Body.mesh.material.albedo_color = color 
