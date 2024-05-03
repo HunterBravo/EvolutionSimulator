@@ -7,7 +7,9 @@ extends CanvasLayer
 @onready var hunger_lable = $Menu/MarginContainer/VB1/HB2/Hunger
 @onready var save_lable = $Menu/MarginContainer/VB1/HB6/Save
 
-#@onready var save_file = SaveFile.g_data
+
+@onready var main_menu = load("res://Scenes/start_menu.tscn")
+
 var save_path = "user://variable.save"
 var save_paths : Array = ["user://variable.save","user://variable.save1","user://variable.save2","user://variable.save3"]
 var save_loc = 0
@@ -86,3 +88,7 @@ func _on_load_pressed():
 
 
 
+
+
+func _on_back_pressed():
+	get_tree().change_scene_to_packed(main_menu)

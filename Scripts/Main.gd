@@ -1,5 +1,5 @@
 extends Node3D
-
+@onready var main_menu = load("res://Scenes/start_menu.tscn")
 var food_scene = load("res://Scenes/Food.tscn")
 var food
 
@@ -31,6 +31,10 @@ func _ready():
 	#add_child(food)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_tree().change_scene_to_packed(main_menu)
 func _process(delta):
 	
 	if startup == false:

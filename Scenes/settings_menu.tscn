@@ -170,6 +170,13 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "LOAD"
 
+[node name="Back" type="Button" parent="Menu"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_6mban")
+text = "BACK"
+
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
@@ -206,3 +213,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 [connection signal="value_changed" from="Menu/MarginContainer/VB1/HB6/save_slider" to="." method="_on_save_slider_value_changed"]
 [connection signal="pressed" from="Menu/MarginContainer/VB1/MarginContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VB1/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="Menu/Back" to="." method="_on_back_pressed"]
