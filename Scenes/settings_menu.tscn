@@ -139,6 +139,21 @@ size_flags_horizontal = 3
 max_value = 256.0
 tick_count = 1
 
+[node name="HB6" type="HBoxContainer" parent="Menu/MarginContainer/VB1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Save" type="Label" parent="Menu/MarginContainer/VB1/HB6"]
+layout_mode = 2
+text = "SAVE"
+
+[node name="save_slider" type="HSlider" parent="Menu/MarginContainer/VB1/HB6"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 3.0
+tick_count = 1
+
 [node name="MarginContainer" type="MarginContainer" parent="Menu/MarginContainer/VB1"]
 layout_mode = 2
 theme_override_constants/margin_top = 50
@@ -188,5 +203,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 [connection signal="value_changed" from="Menu/MarginContainer/VB1/HB3/Speed_slider" to="." method="_on_speed_slider_value_changed"]
 [connection signal="value_changed" from="Menu/MarginContainer/VB1/HB5/Health_slider" to="." method="_on_health_slider_value_changed"]
 [connection signal="value_changed" from="Menu/MarginContainer/VB1/HB2/Hunger_slider" to="." method="_on_hunger_slider_value_changed"]
+[connection signal="value_changed" from="Menu/MarginContainer/VB1/HB6/save_slider" to="." method="_on_save_slider_value_changed"]
 [connection signal="pressed" from="Menu/MarginContainer/VB1/MarginContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu/MarginContainer/VB1/Load" to="." method="_on_load_pressed"]

@@ -5,10 +5,12 @@ extends CanvasLayer
 @onready var speed_lable = $Menu/MarginContainer/VB1/HB3/Speed
 @onready var health_lable = $Menu/MarginContainer/VB1/HB5/Health
 @onready var hunger_lable = $Menu/MarginContainer/VB1/HB2/Hunger
+@onready var save_lable = $Menu/MarginContainer/VB1/HB6/Save
 
 #@onready var save_file = SaveFile.g_data
 var save_path = "user://variable.save"
-
+var save_paths : Array = ["user://variable.save","user://variable.save1","user://variable.save2","user://variable.save3"]
+var save_loc = 0
 var color
 var speed
 var strength
@@ -39,12 +41,16 @@ func _on_hunger_slider_value_changed(value):
 	var text = "HUNGER : %s"
 	hunger_lable.text= text % value
 	hunger = value
+func _on_save_slider_value_changed(value):
+	var text = "SAVE : %s"
+	save_lable.text = text % value
+	save_loc = value
 
 func _on_button_pressed():
 	save()
 
 func save():
-	var file = FileAccess.open(save_path,FileAccess.WRITE)
+	var file = FileAccess.open(save_paths[save_loc],FileAccess.WRITE)
 	file.store_var(color)
 	file.store_var(health)
 	file.store_var(strength)
@@ -53,7 +59,7 @@ func save():
 	
 func load_data():
 	if FileAccess.file_exists(save_path):
-		var file = FileAccess.open(save_path, FileAccess.READ)
+		var file = FileAccess.open(save_paths[save_loc], FileAccess.READ)
 		color = file.get_var()
 		health = file.get_var()
 		strength = file.get_var()
@@ -77,3 +83,6 @@ func set_data():
 
 func _on_load_pressed():
 	load_data()
+
+
+
