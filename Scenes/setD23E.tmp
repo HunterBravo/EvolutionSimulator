@@ -1,0 +1,172 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqcmcfiejls3v"]
+
+[ext_resource type="FontFile" uid="uid://ck3cyhgv8gm5t" path="res://Assets/SedanSC-Regular.ttf" id="1_6mban"]
+[ext_resource type="Script" path="res://Scenes/settings_menu.gd" id="1_8sosv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2auyj"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_aba77"]
+material = SubResource("StandardMaterial3D_2auyj")
+
+[sub_resource type="Environment" id="Environment_d8u5c"]
+background_mode = 2
+background_energy_multiplier = 1.31
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
+tonemap_mode = 2
+tonemap_exposure = 1.83
+tonemap_white = 16.0
+
+[node name="Settings Menu" type="CanvasLayer"]
+script = ExtResource("1_8sosv")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="VB1" type="VBoxContainer" parent="Menu/MarginContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 20.0
+theme_override_constants/separation = 3
+
+[node name="Settings" type="Label" parent="Menu/MarginContainer/VB1"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_6mban")
+theme_override_font_sizes/font_size = 64
+text = "Settings
+"
+
+[node name="HB1" type="HBoxContainer" parent="Menu/MarginContainer/VB1"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 14
+
+[node name="Label" type="Label" parent="Menu/MarginContainer/VB1/HB1"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Creature Color:
+"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Menu/MarginContainer/VB1/HB1"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Pick a colour"
+flat = true
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Settings2" type="Label" parent="Menu/MarginContainer/VB1"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("1_6mban")
+theme_override_font_sizes/font_size = 32
+text = "DNA
+"
+
+[node name="HB4" type="HBoxContainer" parent="Menu/MarginContainer/VB1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Strength" type="Label" parent="Menu/MarginContainer/VB1/HB4"]
+layout_mode = 2
+text = "STRENGTH : 000"
+
+[node name="Strength_slider" type="HSlider" parent="Menu/MarginContainer/VB1/HB4"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 256.0
+tick_count = 1
+
+[node name="HB3" type="HBoxContainer" parent="Menu/MarginContainer/VB1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Speed" type="Label" parent="Menu/MarginContainer/VB1/HB3"]
+layout_mode = 2
+text = "SPEED : 000        "
+
+[node name="Speed_slider" type="HSlider" parent="Menu/MarginContainer/VB1/HB3"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 256.0
+tick_count = 1
+
+[node name="HB5" type="HBoxContainer" parent="Menu/MarginContainer/VB1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Health" type="Label" parent="Menu/MarginContainer/VB1/HB5"]
+layout_mode = 2
+text = "HEALTH : 000     "
+
+[node name="Health_slider" type="HSlider" parent="Menu/MarginContainer/VB1/HB5"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 256.0
+tick_count = 1
+
+[node name="HB2" type="HBoxContainer" parent="Menu/MarginContainer/VB1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Hunger" type="Label" parent="Menu/MarginContainer/VB1/HB2"]
+layout_mode = 2
+text = "HUNGER : 000    "
+
+[node name="Hunger_slider" type="HSlider" parent="Menu/MarginContainer/VB1/HB2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 256.0
+tick_count = 1
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("SphereMesh_aba77")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+environment = SubResource("Environment_d8u5c")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Node3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 366.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Node3D/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(786, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D"]
+
+[connection signal="color_changed" from="Menu/MarginContainer/VB1/HB1/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
+[connection signal="drag_ended" from="Menu/MarginContainer/VB1/HB4/Strength_slider" to="." method="_on_strength_slider_drag_ended"]

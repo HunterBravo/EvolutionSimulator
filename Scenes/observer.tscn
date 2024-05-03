@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://doltse6ybqvuw"]
 
-[ext_resource type="Script" path="res://observer.gd" id="1_4hpjy"]
+[ext_resource type="Script" path="res://Scripts/observer.gd" id="1_lwv6c"]
 
 [node name="Observer" type="Camera3D"]
 current = true
 fov = 90.0
-script = ExtResource("1_4hpjy")
+script = ExtResource("1_lwv6c")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true
